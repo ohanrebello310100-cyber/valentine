@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Be My Valentine ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #ffe6eb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 18px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      max-width: 380px;
+      width: 90%;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    img {
+      width: 220px;
+      height: auto;
+      border-radius: 14px;
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    button {
+      font-size: 16px;
+      padding: 12px 26px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    #yesBtn {
+      background-color: #ff4d6d;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1 id="title">Will you be my Valentine?</h1>
+
+    <img
+      id="mainImage"
+      src="https://gifdb.com/images/high/cute-love-bear-roses-ou7zho5oosxnpo6k.gif"
+      alt="Valentine"
+    />
+
+    <div class="buttons">
+      <button id="yesBtn">Yes</button>
+      <button id="noBtn">No</button>
+    </div>
+  </div>
+
+  <script>
+    const title = document.getElementById("title");
+    const image = document.getElementById("mainImage");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+
+    let yesScale = 1;
+    let noScale = 1;
+    let noClicks = 0;
+
+    const phrases = [
+      "No",
+      "Are you sure?",
+      "Really sure?",
+      "Think again!",
+      "Last chance!",
+      "Surely not?",
+      "You might regret this!",
+      "Give it another thought!",
+      "Are you absolutely certain?",
+      "This could be a mistake!",
+      "Have a heart!",
+      "Don't be so cold!",
+      "Change of heart?",
+      "Wouldn't you reconsider?",
+      "Is that your final answer?",
+      "You're breaking my heart ;("
+    ];
+
+    // ⚠️ THESE FILES MUST EXIST IN THE SAME FOLDER
+    const noImages = [
+      "photo1.jpg",
+      "photo2.jpg",
+      "photo3.jpg",
+      "photo4.jpg"
+    ];
+
+    noBtn.addEventListener("click", () => {
+      // Scale buttons
+      yesScale += 0.2;
+      noScale = Math.max(0.4, noScale - 0.1);
+
+      yesBtn.style.transform = `scale(${yesScale})`;
+      noBtn.style.transform = `scale(${noScale})`;
+
+      // Update text
+      title.textContent =
+        phrases[Math.min(noClicks, phrases.length - 1)];
+
+      // Cycle images
+      image.src = noImages[noClicks % noImages.length];
+
+      noClicks++;
+    });
+
+    yesBtn.addEventListener("click", () => {
+      title.textContent = "Thanks Babe, I love you :)";
+      image.src =
+        "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif";
+
+      yesBtn.disabled = true;
+      noBtn.disabled = true;
+    });
+  </script>
+</body>
+</html>
